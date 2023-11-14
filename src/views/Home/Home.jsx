@@ -6,6 +6,7 @@ import { getProducts } from '../../redux/Actions/actions'
 import Filter from '../../components/Filter/Filter'
 import CardsContainer from '../../components/CardsContainer/CardsContainer'
 import SearchBar from '../../components/SearchBar/SearchBar'
+import Footer from '../Footer/Footer'
 import style from './Home.module.css'
 
 
@@ -31,6 +32,8 @@ const Home = () => {
             <Filter />
 
             <CardsContainer />
+
+            <Footer />
 
         </div>
     )

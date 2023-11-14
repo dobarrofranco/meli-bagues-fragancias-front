@@ -1,0 +1,73 @@
+.fooContainer {
+    display: flex;
+    border-top: 1px solid var(--terciario);
+    margin: 1rem;
+    justify-content: space-between;
+}
+
+.redesFoo {
+    display: flex;
+    gap: 2rem;
+}
+
+.fooLink {
+    color: var(--secundario);
+    text-decoration: none;
+}
+
+.fooLink:active {
+    color: var(--secundario);
+}
+
+.fooLink:focus-visible {
+    outline: none;
+}
+
+.fooText {
+    border-bottom: 1px solid var(--secundario) hidden;
+}
+
+.fooText:hover {
+    border-bottom: 1px solid var(--secundario);
+    transition: 500ms;
+}
+
+.imgWsp {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.linkWsp {
+    display: flex;
+    align-items: center;
+    color: var(--terciario);
+    text-decoration: none;
+}
+
+.textWsp {
+    font-size: 12px;
+    margin: 0;
+}
+
+.linkInsta {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.linkInsta:active {
+    color: var(--terciario);
+}
+
+.linkInsta:focus-visible {
+    outline: 0;
+}
+
+.textLink {
+    margin: 0;
+}
+
+.adminLinkContainer {
+    display: flex;
+}

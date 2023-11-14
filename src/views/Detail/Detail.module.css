@@ -50,6 +50,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    text-decoration: none;
 }
 
 .stockContainer {
@@ -94,6 +95,10 @@
     color: var(--primario);
     transform: scale(1.1);
     transition: 500ms;
+}
+
+.button:focus-visible {
+    outline: none;
 }
 
 .button:active {

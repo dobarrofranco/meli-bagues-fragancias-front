@@ -38,8 +38,10 @@ const Detail = () => {
             </div>
 
             <div className={style.buttonPosition}>
-                <img className={style.wspImage} src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="" />
-                <button className={style.button}>Comprar</button>
+                <a className={style.buttonPosition} href="https://wa.me/message/4PVYWNFCXZEHC1" target='_blank'>
+                    <img className={style.wspImage} src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="" />
+                    <button className={style.button}>Comprar</button>
+                </a>
                 <div className={style.stockContainer}>
                     <h3>Stock: {productDetail?.stock}</h3>
                 </div>
