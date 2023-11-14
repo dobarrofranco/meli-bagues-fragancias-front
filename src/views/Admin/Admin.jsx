@@ -22,6 +22,14 @@ const Admin = () => {
         dispatch(getProducts())
     }, [dispatch])
 
+    useEffect(() => {
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            setUserData(JSON.parse(storedUserData));
+            setRememberMe(true);
+        }
+    }, []);
+
     const [userData, setUserData] = useState({
         user: '',
         password: ''
@@ -62,6 +70,8 @@ const Admin = () => {
         fragance: ''
     })
 
+    const [rememberMe, setRememberMe] = useState(false);
+
     const secureHandler = (event) => {
         event.preventDefault();
         const value = event.target.value;
@@ -76,11 +86,17 @@ const Admin = () => {
     const handleChange = (event) => {
         const property = event.target.name;
         const value = event.target.value;
+        const type = event.target.type;
+        const checked = event.target.checked;
 
-        setUserData({
-            ...userData,
-            [property]: value
-        })
+        if (type === 'checkbox') {
+            setRememberMe(checked)
+        } else {
+            setUserData({
+                ...userData,
+                [property]: value
+            })
+        }
 
         setForm({
             ...form,
@@ -144,6 +160,10 @@ const Admin = () => {
             .then(response => {
                 if (response.data.success === true) {
                     setValidated(true)
+
+                    if (rememberMe) {
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                    }
                 } else {
                     alert('datos incorrectos');
                     window.location.href = '/';
@@ -376,7 +396,7 @@ const Admin = () => {
 
 
                         </form>
-                        
+
                     </div>
 
                     <div className={style.fragancesContainer}>

@@ -3,8 +3,8 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useSelector } from 'react-redux';
-import image1 from '../../images/IMG_20230421_101944.jpg'
-import image2 from '../../images/IMG_20230421_102011.jpg'
+import image1 from '../../images/banner1.jpg'
+import image2 from '../../images/banner2.jpg'
 import image3 from '../../images/IMG_20230421_102027.jpg'
 import image4 from '../../images/IMG_20230421_102050.jpg'
 import image5 from '../../images/IMG_20230421_102308.jpg'
@@ -14,14 +14,14 @@ import './Carousel.css'
 
 const Carousel = () => {
 
-    const products = useSelector(state => state.products);
+    // const products = useSelector(state => state.products);
 
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToShow: 1,
+        slidesToScroll: 1
     };
 
 

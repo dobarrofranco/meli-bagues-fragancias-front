@@ -50,3 +50,48 @@
         margin: 0;
     }
 }
+
+.linkInstaContainer {
+    display: flex;
+    text-align: center;
+    margin-right: auto;
+}
+
+.linkInsta {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.linkInsta:active {
+    color: var(--terciario);
+}
+
+.linkInsta:focus-visible {
+    outline: 0;
+}
+
+.textLink {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .linkInstaContainer {
+        display: flex;
+        text-align: center;
+        margin: 0;
+    }
+}
+
+.navLink {
+    color: var(--secundario);
+    text-decoration: none;
+}
+
+.navLink:active {
+    color: var(--secundario);
+}
+
+.navLink:focus-visible {
+    outline: none;
+}

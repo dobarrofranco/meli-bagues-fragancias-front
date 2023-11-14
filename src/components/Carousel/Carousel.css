@@ -2,20 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    /* height: 300px; */
     margin: 0 auto;
     margin-top: 3rem;
-    background-color: var(--primario);
+    /* background-color: var(--primario); */
 }
 
 .imgCarousel {
-    width: 250px;
-    height: 200px;
+    width: 600px;
+    height: 400px;
 }
 
 .imgCarousel:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: 500ms;
     cursor: pointer;
 }

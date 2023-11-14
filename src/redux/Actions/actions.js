@@ -4,7 +4,7 @@ import { GET_PRODUCTS, GET_PRODUCT_BY_ID, GET_ALL_FRAGANCES, ORDER_NAME, ORDER_P
 
 export const getProducts = () => {
     return async (dispatch) => {
-        const { data } = await axios('http://localhost:3001/products');
+        const { data } = await axios('/products');
         dispatch({
             type: GET_PRODUCTS,
             payload: data
@@ -14,7 +14,7 @@ export const getProducts = () => {
 
 export const getProductsById = (id) => {
     return async (dispatch) => {
-        const { data } = await axios(`http://localhost:3001/products/${id}`);
+        const { data } = await axios(`/products/${id}`);
         dispatch({
             type: GET_PRODUCT_BY_ID,
             payload: data
@@ -24,7 +24,7 @@ export const getProductsById = (id) => {
 
 export const getAllFragances = () => {
     return async (dispatch) => {
-        const { data } = await axios('http://localhost:3001/fragances');
+        const { data } = await axios('/fragances');
         dispatch({
             type: GET_ALL_FRAGANCES,
             payload: data
@@ -34,7 +34,7 @@ export const getAllFragances = () => {
 
 export const orderName = (order) => {
     return async (dispatch) => {
-        const { data } = await axios(`http://localhost:3001/filter/orderName/${order}`);
+        const { data } = await axios(`/filter/orderName/${order}`);
         dispatch({
             type: ORDER_NAME,
             payload: data
@@ -44,7 +44,7 @@ export const orderName = (order) => {
 
 export const orderPrice = (order) => {
     return async (dispatch) => {
-        const { data } = await axios(`http://localhost:3001/filter/orderPrice/${order}`);
+        const { data } = await axios(`/filter/orderPrice/${order}`);
         dispatch({
             type: ORDER_PRICE,
             payload: data
@@ -54,7 +54,7 @@ export const orderPrice = (order) => {
 
 export const filterGender = (gender) => {
     return async (dispatch) => {
-        const { data } = await axios(`http://localhost:3001/filter/gender/${gender}`);
+        const { data } = await axios(`/filter/gender/${gender}`);
         dispatch({
             type: FILTER_GENDER,
             payload: data
@@ -64,7 +64,7 @@ export const filterGender = (gender) => {
 
 export const searchByName = (name) => {
     return async (dispatch) => {
-        const { data } = await axios(`http://localhost:3001/products/search?name=${name}`);
+        const { data } = await axios(`/products/search?name=${name}`);
         dispatch({
             type: SEARCH_BY_NAME,
             payload: data
