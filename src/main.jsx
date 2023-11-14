@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import axios from 'axios'
 
 // axios.defaults.baseURL = 'http://localhost:3001';
-axios.defaults.baseURL = 'meli-bagues-fragancias-back-production.up.railway.app';
+axios.defaults.baseURL = 'https://meli-bagues-fragancias-back-production.up.railway.app';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
