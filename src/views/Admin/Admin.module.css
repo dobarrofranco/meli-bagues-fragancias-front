@@ -1,0 +1,64 @@
+.formularios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+}
+
+.description {
+    width: 177px;
+    height: 60px;
+    resize: vertical;
+}
+
+@media (max-width: 768px) {
+    .formularios {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.deleteBtnContainer {
+    display: flex;
+    /* justify-content: center; */
+    padding: 2rem 0;
+}
+
+.trashIcon {
+    position: relative;
+    top: 10%;
+}
+
+.secureDiv {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    /* width: 100px; */
+    /* align-items: center; */
+    gap: 10px;
+}
+
+.siNo {
+    display: flex;
+    /* justify-content: center; */
+    gap: 1rem;
+}
+
+.fragancesContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.fragancesList {
+    margin: 0;
+}
+
+.fraganceInfo {
+    display: flex;
+    gap: 1rem;
+}
+
+.imgInfo {
+    width: 50px;
+    height: 50px;
+}

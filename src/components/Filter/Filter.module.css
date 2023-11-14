@@ -1,0 +1,39 @@
+:root {
+    --arrow-bg: #d6b6a65d;
+    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+    --option-bg: white;
+    --select-bg: #d6b6a65d;
+  }
+
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+@media (max-width: 768px) {
+    .filterContainer {
+        align-items: center;
+    }
+}
+
+.select {
+    font-family: 'Noto Sans', sans-serif;
+    appearance: none;
+    border: 0;
+    width: 20rem;
+    padding: 1rem 4rem 1rem 1rem;
+    background-color: #d6b6a65d;
+    border-radius: 0.25em;
+    cursor: pointer;
+    background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+    linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+    &:focus {
+        outline: none;
+    }
+}
+
+option {
+    background-color: #d6b6a679;
+}

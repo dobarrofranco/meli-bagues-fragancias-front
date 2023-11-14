@@ -1,0 +1,6 @@
+const validation = () => {
+    let errors = {}
+
+    
+
+}

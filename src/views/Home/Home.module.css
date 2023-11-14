@@ -1,0 +1,13 @@
+.backHome {
+    background-color: var(--primario);
+    width: 100%;
+    height: 100vh;
+}
+
+.fraganciaName {
+    padding: 1rem 1rem 1rem 0;
+    margin: 0;
+    border-bottom: 1px solid var(--terciario);
+    border-top: 20px solid var(--secundario);
+    font-size: 26px;
+}

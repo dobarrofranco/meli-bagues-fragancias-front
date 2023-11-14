@@ -1,0 +1,17 @@
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 30px;
+    padding: 3rem;
+}
+
+@media (min-width: 768px) {
+    .cardsContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+

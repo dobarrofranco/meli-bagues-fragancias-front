@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+:root {
+    --primario: #E6DBD7;
+    --secundario: #D6B6A6;
+    --terciario: #5B3723;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    width: min(90%, 120rem);
+    margin: 0 auto;
+    background-color: var(--primario);
+    padding-top: 2rem;
+    font-family: 'Noto Sans', sans-serif;
+}
