@@ -23,9 +23,9 @@ const NavBar = () => {
                 <NavLink className={style.navLink} to={'/'}>
                     <h1 className={style.navText}>Inicio</h1>
                 </NavLink>
-                {/* <NavLink to>
-                    <h1 className={style.navText}>Contacto</h1>
-                </NavLink> */}
+                <NavLink to={'/admin'}>
+                    <h1 className={style.navText}>Admin</h1>
+                </NavLink>
             </div>
 
         </div>
