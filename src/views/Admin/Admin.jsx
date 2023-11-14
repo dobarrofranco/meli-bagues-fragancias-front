@@ -156,7 +156,7 @@ const Admin = () => {
     const handleSubmitLogin = (event) => {
         event.preventDefault();
 
-        axios.post('http://localhost:3001/admin', userData)
+        axios.post('/admin', userData)
             .then(response => {
                 if (response.data.success === true) {
                     setValidated(true)
@@ -193,7 +193,7 @@ const Admin = () => {
         }
 
         try {
-            await axios.post('http://localhost:3001/products', formData, {
+            await axios.post('/products', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -209,7 +209,7 @@ const Admin = () => {
 
         try {
 
-            axios.delete(`http://localhost:3001/products/${productName}`)
+            axios.delete(`/products/${productName}`)
                 .then(alert(`${productName} eliminado`))
 
         } catch (error) {
@@ -248,7 +248,7 @@ const Admin = () => {
         }
 
         try {
-            await axios.put(`http://localhost:3001/products/${productId}`, formDataMod, {
+            await axios.put(`/products/${productId}`, formDataMod, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
