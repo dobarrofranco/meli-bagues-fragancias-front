@@ -211,6 +211,7 @@ const Admin = () => {
 
             axios.delete(`/products/${productName}`)
                 .then(alert(`${productName} eliminado`))
+                .then(window.location.href = '/admin');
 
         } catch (error) {
             console.log('No se ha podido eliminar el producto ' + { productName }, error);
