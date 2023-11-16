@@ -1,4 +1,4 @@
-import {Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from './views/Home/Home'
 import NavBar from "./components/NavBar/NavBar";
 import Detail from "./views/Detail/Detail";
@@ -10,24 +10,24 @@ function App() {
   return (
     <div className={style.appContainer}>
 
-      <NavBar/>
+      <NavBar />
 
       <Routes>
 
         <Route
           path="/"
-          element={<Home/>}
-          />
+          element={<Home />}
+        />
 
 
         <Route
           path="/detail/:id"
-          element={<Detail/>}
+          element={<Detail />}
         />
 
         <Route
           path="/admin"
-          element={<Admin/>}
+          element={<Admin />}
         />
 
       </Routes>

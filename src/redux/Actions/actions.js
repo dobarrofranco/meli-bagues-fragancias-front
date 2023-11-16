@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID, GET_ALL_FRAGANCES, ORDER_NAME, ORDER_PRICE, FILTER_GENDER, SEARCH_BY_NAME } from './actions-types';
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID, GET_ALL_FRAGANCES, ORDER_NAME, ORDER_PRICE, FILTER_GENDER, SEARCH_BY_NAME, FILTER_FRAGANCE, COMBINATED_FILTER } from './actions-types';
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -67,6 +67,26 @@ export const searchByName = (name) => {
         const { data } = await axios(`/products/search?name=${name}`);
         dispatch({
             type: SEARCH_BY_NAME,
+            payload: data
+        })
+    }
+}
+
+export const filterFragance = (name) => {
+    return async (dispatch) => {
+        const { data } = await axios(`/filter/fragance/${name}`);
+        dispatch({
+            type: FILTER_FRAGANCE,
+            payload: data
+        })
+    }
+}
+
+export const combinatedFilter = ({orderName, orderPrice, gender, tribute, fragance}) => {
+    return async (dispatch) => {
+        const { data } = await axios(`/filter/?fragance=${fragance}&orderName=${orderName}&orderPrice=${orderPrice}&gender=${gender}&tribute=${tribute}`);
+        dispatch({
+            type: COMBINATED_FILTER,
             payload: data
         })
     }

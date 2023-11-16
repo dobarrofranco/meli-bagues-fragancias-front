@@ -37,3 +37,18 @@
 option {
     background-color: #d6b6a679;
 }
+
+.allBtn {
+    width: 20rem;
+    height: 3rem;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #d6b6a65d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.allBtn:hover {
+    background-color: var(--secundario);
+    transition: 500ms;
+}

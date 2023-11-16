@@ -10,7 +10,22 @@ const Admin = () => {
 
     const fragances = useSelector(state => state.fragances);
 
-    const products = useSelector(state => state.productsCopy);
+    let products = useSelector(state => state.productsCopy);
+
+    const sortedProducts = [...products].sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    });
+
+    products = sortedProducts;
 
     const dispatch = useDispatch();
 
@@ -44,7 +59,10 @@ const Admin = () => {
         productId: ''
     });
 
-    const [productName, setProductName] = useState()
+    const [productName, setProductName] = useState();
+
+    const [fraganceName, setFraganceName] = useState();
+    const [fraganceId, setFraganceId] = useState();
 
     const [secure, setSecure] = useState(false);
 
@@ -70,7 +88,19 @@ const Admin = () => {
         fragance: ''
     })
 
+    const [formFra, setFormFra] = useState({
+        name: ''
+    })
+
+    const [formEditFra, setFormEditFra] = useState({
+        name: ''
+    })
+
     const [rememberMe, setRememberMe] = useState(false);
+
+    const [successMessage, setSuccessMessage] = useState();
+    const [successMessageDel, setSuccessMessageDel] = useState();
+
 
     const secureHandler = (event) => {
         event.preventDefault();
@@ -101,6 +131,11 @@ const Admin = () => {
         setForm({
             ...form,
             [property]: value
+        })
+
+        setFormFra({
+            ...formFra,
+            name: value
         })
 
     }
@@ -205,13 +240,16 @@ const Admin = () => {
         }
     }
 
-    const dispatchDelete = async () => {
+    const dispatchDelete = async (event) => {
+        event.preventDefault();
 
         try {
 
-            axios.delete(`/products/${productName}`)
-                .then(alert(`${productName} eliminado`))
-                .then(window.location.href = '/');
+            await axios.delete(`/products/${productName}`)
+
+            setSuccessMessageDel('Se eliminó correctamente.');
+
+            setProductName('');
 
         } catch (error) {
             console.log('No se ha podido eliminar el producto ' + { productName }, error);
@@ -261,6 +299,84 @@ const Admin = () => {
         }
     }
 
+    const submitFragance = async (event) => {
+        event.preventDefault();
+
+        try {
+            await axios.post('/fragances', formFra);
+
+            setSuccessMessage('Se creó correctamente.');
+
+            setFormFra({
+                name: ''
+            })
+
+        } catch (error) {
+            console.error('Error al enviar el formulario fragancia:', error);
+        }
+    }
+
+    const changeDeleteFragance = async (event) => {
+        event.preventDefault()
+
+        const value = event.target.value;
+
+        setFraganceName(value);
+
+    }
+
+    const deleteFragance = async (event) => {
+        event.preventDefault()
+
+        try {
+            await axios.delete(`/fragances/${fraganceName}`)
+
+            setSuccessMessageDel('Eliminado correctamente')
+
+            setFraganceName('')
+
+        } catch (error) {
+            console.error('Error al borrar fragancia:', error);
+        }
+    }
+
+    // const changeEditFragance = async (event) => {
+
+    //     const value = event.target.value;
+
+    //     setFraganceId(value);
+
+    //     console.log(fraganceId);
+    // }
+
+    // const changeEditFraInput = (event) => {
+    //     event.persist(); // Asegura que el evento se conserve
+    //     const value = event.target.value;
+    
+    //     setFraganceId(value);
+    // };
+
+    // const editFragance = async (event) => {
+    //     event.preventDefault();
+    
+    //     try {
+    //         const currentFraganceId = fraganceId;
+    
+    //         await axios.put(`/fragances/${currentFraganceId}`, formEditFra);
+    
+    //         setSuccessMessage('Modificado correctamente');
+
+    //         setFormEditFra(prevState => ({
+    //             ...prevState,
+    //             name: ''
+    //         }));
+    
+    //     } catch (error) {
+    //         console.error('Error al editar fragancia:', error);
+    //     }
+    // };
+
+
     return (
         <div>
 
@@ -295,6 +411,7 @@ const Admin = () => {
                             <select onChange={handleChange} name='gender' value={form.gender}>
                                 <option>Femenino</option>
                                 <option>Masculino</option>
+                                <option>Unisex</option>
                             </select>
                             <p>Imagen</p>
                             <input type="file" onChange={handleImageChange} name='image' />
@@ -335,6 +452,7 @@ const Admin = () => {
                                     <select onChange={handleChangeMod} name='gender' value={formMod.gender}>
                                         <option>Femenino</option>
                                         <option>Masculino</option>
+                                        <option>Unisex</option>
                                     </select>
                                     <p>Imagen</p>
                                     <input type="file" onChange={handleImageChangeMod} name='image' />
@@ -387,6 +505,7 @@ const Admin = () => {
                                         ?
                                         <div className={style.deleteBtnContainer}>
                                             <button onClick={dispatchDelete} >Eliminar <FaTrashCan className={style.trashIcon} /> </button>
+                                            {successMessageDel && <p style={{ color: 'green' }}>{successMessageDel}</p>}
                                         </div>
                                         : null
                                     }
@@ -398,6 +517,46 @@ const Admin = () => {
 
                         </form>
 
+
+                    </div>
+
+                    <div className={style.fraganceForm}>
+                        <form onSubmit={submitFragance}>
+                            <p style={{ fontSize: '14px' }}>Agregar Fragancias</p>
+                            <p>Nombre</p>
+                            <input onChange={handleChange} type="text" value={formFra.name} />
+                            <button type='submit'>Agregar</button>
+                            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                        </form>
+
+                        <form onSubmit={deleteFragance}>
+                            <p style={{ fontSize: '14px' }}>Eliminar Fragancia</p>
+                            <select onChange={changeDeleteFragance}>
+                                {fragances.map(fragance => (
+                                    <option key={fragance.id} value={fragance.name}>
+                                        {fragance.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <button type='submit'>Eliminar</button>
+                            {successMessageDel && <p style={{ color: 'green' }}>{successMessageDel}</p>}
+                        </form>
+
+                        {/* <form onSubmit={editFragance}>
+                            <p style={{ fontSize: '14px' }}>Editar Fragancia</p>
+                            <select onChange={changeEditFragance}>
+                                <option value=" "> </option>
+                                {fragances.map(fragance => (
+                                    <option key={fragance.id} value={fragance.id}>
+                                        {fragance.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <p>Nuevo Nombre</p>
+                            <input type="text" onChange={changeEditFraInput} value={formEditFra.name} />
+                            <button type='submit'>Modificar</button>
+                            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                        </form> */}
                     </div>
 
                     <div className={style.fragancesContainer}>
@@ -405,14 +564,14 @@ const Admin = () => {
 
                         {products.map(product => (
                             <div className={style.fraganceList}>
-                                <h3>{product.name} - </h3>
+                                <h3 >{product.name} - </h3>
                                 <div className={style.fraganceInfo}>
-                                    <img key={product.id} className={style.imgInfo} src={product.image} alt="" />
-                                    <h3>Precio: ${product.price} -</h3>
-                                    <h3>Stock: {product.stock} -</h3>
-                                    <h3>Réplica: {product.replica} -</h3>
-                                    <h3>Género: {product.gender} -</h3>
-                                    <h3>Fragancia: {product.fragance}</h3>
+                                    <img className={style.imgInfo} src={product.image} alt="" />
+                                    <h3 >Precio: ${product.price} -</h3>
+                                    <h3 >Stock: {product.stock} -</h3>
+                                    <h3 >Réplica: {product.replica} -</h3>
+                                    <h3 >Género: {product.gender} -</h3>
+                                    <h3 >Fragancia: {product.fragance}</h3>
                                 </div>
                             </div>
                         ))}

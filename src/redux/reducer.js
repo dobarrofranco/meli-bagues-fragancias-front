@@ -1,4 +1,4 @@
-import { FILTER_GENDER, GET_ALL_FRAGANCES, GET_PRODUCTS, GET_PRODUCT_BY_ID, ORDER_NAME, ORDER_PRICE, SEARCH_BY_NAME } from "./Actions/actions-types"
+import { COMBINATED_FILTER, FILTER_FRAGANCE, FILTER_GENDER, GET_ALL_FRAGANCES, GET_PRODUCTS, GET_PRODUCT_BY_ID, ORDER_NAME, ORDER_PRICE, SEARCH_BY_NAME } from "./Actions/actions-types"
 
 
 const initialState = {
@@ -57,6 +57,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 products: payload
             }
         
+        case FILTER_FRAGANCE:
+            return {
+                ...state,
+                products: payload
+            }
+
+        case COMBINATED_FILTER:
+            return {
+                ...state,
+                products: payload
+            }
+
         default:
             return {
                 ...state
