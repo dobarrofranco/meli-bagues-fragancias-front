@@ -133,6 +133,12 @@ const Admin = () => {
             [property]: value
         })
 
+    }
+
+    const handleChangeFra = (event) => {
+
+        const value = event.target.value;
+
         setFormFra({
             ...formFra,
             name: value
@@ -352,25 +358,25 @@ const Admin = () => {
     // const changeEditFraInput = (event) => {
     //     event.persist(); // Asegura que el evento se conserve
     //     const value = event.target.value;
-    
+
     //     setFraganceId(value);
     // };
 
     // const editFragance = async (event) => {
     //     event.preventDefault();
-    
+
     //     try {
     //         const currentFraganceId = fraganceId;
-    
+
     //         await axios.put(`/fragances/${currentFraganceId}`, formEditFra);
-    
+
     //         setSuccessMessage('Modificado correctamente');
 
     //         setFormEditFra(prevState => ({
     //             ...prevState,
     //             name: ''
     //         }));
-    
+
     //     } catch (error) {
     //         console.error('Error al editar fragancia:', error);
     //     }
@@ -409,6 +415,7 @@ const Admin = () => {
                             <textarea className={style.description} type="text" onChange={handleChange} name='description' value={form.description} />
                             <p>Género</p>
                             <select onChange={handleChange} name='gender' value={form.gender}>
+                                <option value=" "> </option>
                                 <option>Femenino</option>
                                 <option>Masculino</option>
                                 <option>Unisex</option>
@@ -419,8 +426,11 @@ const Admin = () => {
                             <input type="text" onChange={handleChange} name='replica' value={form.replica} />
                             <p>Stock</p>
                             <input type="number" onChange={handleChange} min='0' name='stock' value={form.stock} />
+                            {/* <p>Homenaje</p>
+                            <input type="checkbox" /> */}
                             <p>Fragancia</p>
                             <select onChange={handleChange} value={form.fragance} name="fragance">
+                                <option value=" "> </option>
                                 {fragances.map(fragance => (
                                     <option key={fragance.id} value={fragance.id}>
                                         {fragance.name}
@@ -450,6 +460,7 @@ const Admin = () => {
                                     <textarea className={style.description} type="text" onChange={handleChangeMod} name='description' value={formMod.description} />
                                     <p>Género</p>
                                     <select onChange={handleChangeMod} name='gender' value={formMod.gender}>
+                                        <option value=" "> </option>
                                         <option>Femenino</option>
                                         <option>Masculino</option>
                                         <option>Unisex</option>
@@ -462,6 +473,7 @@ const Admin = () => {
                                     <input type="number" onChange={handleChangeMod} min='0' name='stock' value={formMod.stock} />
                                     <p>Fragancia</p>
                                     <select onChange={handleChangeMod} value={formMod.fragance} name="fragance">
+                                        <option value=" "> </option>
                                         {fragances.map(fragance => (
                                             <option key={fragance.id} value={fragance.id}>
                                                 {fragance.name}
@@ -524,7 +536,7 @@ const Admin = () => {
                         <form onSubmit={submitFragance}>
                             <p style={{ fontSize: '14px' }}>Agregar Fragancias</p>
                             <p>Nombre</p>
-                            <input onChange={handleChange} type="text" value={formFra.name} />
+                            <input onChange={handleChangeFra} type="text" value={formFra.name} />
                             <button type='submit'>Agregar</button>
                             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
                         </form>
@@ -532,6 +544,7 @@ const Admin = () => {
                         <form onSubmit={deleteFragance}>
                             <p style={{ fontSize: '14px' }}>Eliminar Fragancia</p>
                             <select onChange={changeDeleteFragance}>
+                                <option value=" "> </option>
                                 {fragances.map(fragance => (
                                     <option key={fragance.id} value={fragance.name}>
                                         {fragance.name}
