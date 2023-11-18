@@ -15,10 +15,6 @@ const Detail = () => {
 
     const productDetail = product[0];
 
-    if (!productDetail) {
-        return <p>Cargando...</p>;
-    }
-
     const replaceNewLinesAndSplit = (text) => {
         return text.replace(/(\r\n|\n|\r)/gm, '. ').split('. ');
     };
