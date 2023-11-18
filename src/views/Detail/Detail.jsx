@@ -15,12 +15,6 @@ const Detail = () => {
 
     const productDetail = product[0];
 
-    const replaceNewLinesAndSplit = (text) => {
-        return text.replace(/(\r\n|\n|\r)/gm, '. ').split('. ');
-    };
-
-    const descriptionLines = replaceNewLinesAndSplit(productDetail?.description);
-
     useEffect(() => {
         dispatch(getProductsById(id))
     }, [dispatch, id])
@@ -36,10 +30,8 @@ const Detail = () => {
                     <img className={style.imgDetail} src={productDetail?.image} alt={productDetail?.name} />
                 </div>
                 <div className={style.descDetail}>
-                    <p className={style.textDetail} style={{fontWeight:'bold'}}>Descripción: </p>
-                    {descriptionLines?.map((line, index) => (
-                        <p key={index} className={style.textDetail}>{line}</p>
-                    ))}
+                    <p className={style.textDetail}>Descripción: </p>
+                    <p className={style.textDetail}>{productDetail?.description}</p>
                     <div className={style.detailFragance}>
                         <p className={style.textDetailFragance}>Fragancia: {productDetail?.fragance}</p>
                         <p className={style.textDetailFragance}>Género: {productDetail?.gender}</p>
