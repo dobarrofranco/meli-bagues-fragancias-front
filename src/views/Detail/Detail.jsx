@@ -15,6 +15,16 @@ const Detail = () => {
 
     const productDetail = product[0];
 
+    if (!productDetail) {
+        return <p>Cargando...</p>;
+    }
+
+    const replaceNewLinesAndSplit = (text) => {
+        return text.replace(/(\r\n|\n|\r)/gm, '. ').split('. ');
+    };
+
+    const descriptionLines = replaceNewLinesAndSplit(productDetail?.description);
+
     useEffect(() => {
         dispatch(getProductsById(id))
     }, [dispatch, id])
@@ -24,15 +34,20 @@ const Detail = () => {
             <div className={style.detailContainer}>
                 <div className={style.nameContainer}>
                     <h1 className={style.tittleDetail}>{productDetail?.name} - $ {productDetail?.price}</h1>
+                    {productDetail?.tribute ? <p className={style.textDetailFragance}>Homenaje</p> : null}
                 </div>
                 <div className={style.imgContainer}>
                     <img className={style.imgDetail} src={productDetail?.image} alt={productDetail?.name} />
                 </div>
                 <div className={style.descDetail}>
-                    <p className={style.textDetail}>Descripción: </p>
-                    <p className={style.textDetail}>{productDetail?.description}</p>
-                    <p className={style.textDetailFragance}>Fragancia: </p>
-                    <p className={style.textDetailFragance}>{productDetail?.fragance}</p>
+                    <p className={style.textDetail} style={{fontWeight:'bold'}}>Descripción: </p>
+                    {descriptionLines?.map((line, index) => (
+                        <p key={index} className={style.textDetail}>{line}</p>
+                    ))}
+                    <div className={style.detailFragance}>
+                        <p className={style.textDetailFragance}>Fragancia: {productDetail?.fragance}</p>
+                        <p className={style.textDetailFragance}>Género: {productDetail?.gender}</p>
+                    </div>
                 </div>
 
             </div>

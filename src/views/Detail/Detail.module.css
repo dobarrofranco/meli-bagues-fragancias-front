@@ -3,7 +3,6 @@
 .backDetail {
     display: flex;
     justify-content: center;
-    padding-top: 3rem;
 }
 
 .nameContainer {
@@ -37,6 +36,12 @@
 
 .textDetail {
     margin: 3px 0;
+}
+
+.detailFragance {
+    display: flex;
+    gap: 1rem;
+    border: 1px solid var(--secundario);
 }
 
 .textDetailFragance {

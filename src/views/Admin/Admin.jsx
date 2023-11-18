@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getAllFragances, getProducts } from '../../redux/Actions/actions';
 import { FaTrashCan } from 'react-icons/fa6'
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import style from './Admin.module.css'
 
 const Admin = () => {
@@ -50,6 +51,8 @@ const Admin = () => {
         password: ''
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+
     const [validated, setValidated] = useState(false);
 
     const [modifying, setModifying] = useState(false);
@@ -74,6 +77,7 @@ const Admin = () => {
         image: '',
         replica: '',
         stock: '',
+        tribute: false,
         fragance: ''
     })
 
@@ -85,6 +89,7 @@ const Admin = () => {
         image: '',
         replica: '',
         stock: '',
+        tribute: false,
         fragance: ''
     })
 
@@ -92,15 +97,18 @@ const Admin = () => {
         name: ''
     })
 
-    const [formEditFra, setFormEditFra] = useState({
-        name: ''
-    })
+    // const [formEditFra, setFormEditFra] = useState({
+    //     name: ''
+    // })
 
     const [rememberMe, setRememberMe] = useState(false);
 
     const [successMessage, setSuccessMessage] = useState();
     const [successMessageDel, setSuccessMessageDel] = useState();
 
+    const handleTogglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const secureHandler = (event) => {
         event.preventDefault();
@@ -115,7 +123,7 @@ const Admin = () => {
 
     const handleChange = (event) => {
         const property = event.target.name;
-        const value = event.target.value;
+        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         const type = event.target.type;
         const checked = event.target.checked;
 
@@ -203,8 +211,8 @@ const Admin = () => {
                     setValidated(true)
 
                     if (rememberMe) {
-                        localStorage.setItem('userData', JSON.stringify(userData));
-                    }
+                        Cookies.set('userData', JSON.stringify(userData), { expires: 7 });
+                      }
                 } else {
                     alert('datos incorrectos');
                     window.location.href = '/';
@@ -226,6 +234,7 @@ const Admin = () => {
         formData.append('image', form.image);
         formData.append('replica', form.replica);
         formData.append('stock', form.stock);
+        formData.append('tribute', form.tribute);
         formData.append('fragance', form.fragance);
 
         if (!form.name || !form.price || !form.description || !form.gender || !form.replica || !form.stock || !form.fragance) {
@@ -240,7 +249,7 @@ const Admin = () => {
                 },
             });
 
-            // Manejar la respuesta si es necesario
+            setSuccessMessage('Se creó correctamente.');
         } catch (error) {
             console.error('Error al enviar el formulario:', error);
         }
@@ -299,7 +308,7 @@ const Admin = () => {
                 },
             });
 
-            // Manejar la respuesta si es necesario
+            setSuccessMessage('Se creó correctamente.');
         } catch (error) {
             console.error('Error al enviar el formulario:', error);
         }
@@ -382,7 +391,6 @@ const Admin = () => {
     //     }
     // };
 
-
     return (
         <div>
 
@@ -391,7 +399,9 @@ const Admin = () => {
                     <p style={{ fontSize: '14px' }}>usuario</p>
                     <input onChange={handleChange} type="text" name='user' value={userData.user} />
                     <p style={{ fontSize: '14px' }}>contraseña</p>
-                    <input onChange={handleChange} type="password" name='password' value={userData.password} />
+                    <input onChange={handleChange} type={showPassword ? 'text' : 'password'} name='password' value={userData.password} />
+                    <input type="checkbox" onChange={handleTogglePasswordVisibility} />
+                    <label>Mostrar contraseña</label>
                     <br />
                     <input type="checkbox" />
                     <label>Recuérdame</label>
@@ -426,8 +436,8 @@ const Admin = () => {
                             <input type="text" onChange={handleChange} name='replica' value={form.replica} />
                             <p>Stock</p>
                             <input type="number" onChange={handleChange} min='0' name='stock' value={form.stock} />
-                            {/* <p>Homenaje</p>
-                            <input type="checkbox" /> */}
+                            <p>Homenaje</p>
+                            <input type="checkbox" onChange={handleChange} name='tribute' value={form.tribute} />
                             <p>Fragancia</p>
                             <select onChange={handleChange} value={form.fragance} name="fragance">
                                 <option value=" "> </option>
@@ -482,6 +492,7 @@ const Admin = () => {
                                     </select>
                                     <p></p>
                                     <button>Actualizar producto</button>
+                                    {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
                                 </div>
 
                                 : null
